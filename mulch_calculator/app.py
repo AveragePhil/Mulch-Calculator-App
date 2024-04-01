@@ -2,16 +2,13 @@ import sys
 
 from PyQt6.QtWidgets import (
     QApplication,
-    QCheckBox,
     QComboBox,
     QDoubleSpinBox,
     QLabel,
     QLineEdit,
     QMainWindow,
     QPushButton,
-    QSlider,
     QSpinBox,
-    QTimeEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -26,15 +23,12 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         widgets = [
-            QCheckBox,
             QComboBox,
             QDoubleSpinBox,
             QLabel,
             QLineEdit,
             QPushButton,
-            QSlider,
             QSpinBox,
-            QTimeEdit,
         ]
 
         for w in widgets:

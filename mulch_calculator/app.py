@@ -7,7 +7,6 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QMainWindow,
     QPushButton,
-    QSpinBox,
     QVBoxLayout,
     QHBoxLayout,
     QWidget,
@@ -20,11 +19,15 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Mulch Calculator")
-        self.setContentsMargins(10,10,10,10)
+        self.setContentsMargins(20,30,20,20)
 
         layout = QVBoxLayout()
         title_label = QLabel("Mulch Calculator")
-        title_label.setFont(QFont("Arial", 14, 500))
+        title_label.setContentsMargins(115,0,0,30)
+        title_label.setFont(QFont("Roboto", 18, 700))
+
+        top_line_label = QLabel("_______________________________________________")
+        bottom_line_label = QLabel("_______________________________________________")
         
         area_layout = QHBoxLayout()
         area_label = QLabel("Total area: ")
@@ -33,17 +36,17 @@ class MainWindow(QMainWindow):
         area_layout.addWidget(area_label)
         area_layout.addWidget(area_line)
         area_layout.addWidget(area_units)
-        area_layout.setContentsMargins(0,30,0,0)
+        area_layout.setContentsMargins(56,15,0,0)
 
 
         depth_layout = QHBoxLayout()
-        depth_label = QLabel("Mulch Layer Depth: ")
+        depth_label = QLabel("Mulch layer depth: ")
         depth_line = QLineEdit()
         depth_units = QLabel("centimeters")
         depth_layout.addWidget(depth_label)
         depth_layout.addWidget(depth_line)
         depth_layout.addWidget(depth_units)
-        depth_layout.setContentsMargins(0,0,0,25)
+        depth_layout.setContentsMargins(0,0,0,10)
 
         buttons_layout = QHBoxLayout()
         calculate_button = QPushButton("Calculate")
@@ -51,10 +54,16 @@ class MainWindow(QMainWindow):
         buttons_layout.addWidget(calculate_button)
         buttons_layout.addWidget(clear_button)
 
+        result_label = QLabel("The amount of mulch needed is ")
+        result_label.setContentsMargins(0,10,10,10)
+
         layout.addWidget(title_label)
+        layout.addWidget(top_line_label)
         layout.addLayout(area_layout)
         layout.addLayout(depth_layout)
         layout.addLayout(buttons_layout)
+        layout.addWidget(bottom_line_label)
+        layout.addWidget(result_label)
         widget = QWidget()
         widget.setLayout(layout)
 
@@ -63,7 +72,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
 app = QApplication(sys.argv)
-app.setFont(QFont("Arial",9))
+app.setFont(QFont("Roboto",12))
 window = MainWindow()
 window.show()
 

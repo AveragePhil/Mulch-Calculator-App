@@ -23,26 +23,30 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         title_label = QLabel("Mulch Calculator")
-        title_label.setContentsMargins(115,0,0,30)
+        title_label.setContentsMargins(130,0,0,30)
         title_label.setFont(QFont("Roboto", 18, 700))
 
-        top_line_label = QLabel("_______________________________________________")
-        bottom_line_label = QLabel("_______________________________________________")
+        top_line_label = QLabel("__________________________________________________")
+        bottom_line_label = QLabel("__________________________________________________")
         
         area_layout = QHBoxLayout()
         area_label = QLabel("Total area: ")
+        area_label.setFont(QFont("Roboto", 12, 600))
         area_line = QLineEdit()
         area_units = QLabel("square meters")
+        area_units.setFont(QFont("Roboto", 12, 600))
         area_layout.addWidget(area_label)
         area_layout.addWidget(area_line)
         area_layout.addWidget(area_units)
-        area_layout.setContentsMargins(56,15,0,0)
+        area_layout.setContentsMargins(62,15,0,0)
 
 
         depth_layout = QHBoxLayout()
         depth_label = QLabel("Mulch layer depth: ")
+        depth_label.setFont(QFont("Roboto", 12, 600))
         depth_line = QLineEdit()
         depth_units = QLabel("centimeters")
+        depth_units.setFont(QFont("Roboto", 12, 600))
         depth_layout.addWidget(depth_label)
         depth_layout.addWidget(depth_line)
         depth_layout.addWidget(depth_units)
@@ -50,11 +54,13 @@ class MainWindow(QMainWindow):
 
         buttons_layout = QHBoxLayout()
         calculate_button = QPushButton("Calculate")
+        calculate_button.setStyleSheet("background-color: lime;" "color: white;")
+        calculate_button.setFont(QFont("Roboto", 12, 700))
         clear_button = QPushButton("Clear")
         buttons_layout.addWidget(calculate_button)
         buttons_layout.addWidget(clear_button)
-
         result_label = QLabel("The amount of mulch needed is ")
+        result_label.setFont(QFont("Roboto", 12, 600))
         result_label.setContentsMargins(0,10,10,10)
 
         layout.addWidget(title_label)

@@ -32,11 +32,11 @@ class MainWindow(QMainWindow):
         area_layout = QHBoxLayout()
         area_label = QLabel("Total area: ")
         area_label.setFont(QFont("Roboto", 12, 600))
-        area_line = QLineEdit()
+        self.area_line = QLineEdit()
         area_units = QLabel("square meters")
         area_units.setFont(QFont("Roboto", 12, 600))
         area_layout.addWidget(area_label)
-        area_layout.addWidget(area_line)
+        area_layout.addWidget(self.area_line)
         area_layout.addWidget(area_units)
         area_layout.setContentsMargins(62,15,0,0)
 
@@ -44,20 +44,21 @@ class MainWindow(QMainWindow):
         depth_layout = QHBoxLayout()
         depth_label = QLabel("Mulch layer depth: ")
         depth_label.setFont(QFont("Roboto", 12, 600))
-        depth_line = QLineEdit()
+        self.depth_line = QLineEdit()
         depth_units = QLabel("centimeters")
         depth_units.setFont(QFont("Roboto", 12, 600))
         depth_layout.addWidget(depth_label)
-        depth_layout.addWidget(depth_line)
+        depth_layout.addWidget(self.depth_line)
         depth_layout.addWidget(depth_units)
         depth_layout.setContentsMargins(0,0,0,10)
 
         buttons_layout = QHBoxLayout()
-        calculate_button = QPushButton("Calculate")
-        calculate_button.setStyleSheet("background-color: lime;" "color: white;")
-        calculate_button.setFont(QFont("Roboto", 12, 700))
+        self.calculate_button = QPushButton("Calculate")
+        self.calculate_button.setStyleSheet("background-color: lime;" "color: white;")
+        self.calculate_button.setFont(QFont("Roboto", 12, 700))
+        self.calculate_button.clicked.connect(self.calculate_mulch)
         clear_button = QPushButton("Clear")
-        buttons_layout.addWidget(calculate_button)
+        buttons_layout.addWidget(self.calculate_button)
         buttons_layout.addWidget(clear_button)
         result_label = QLabel("The amount of mulch needed is ")
         result_label.setFont(QFont("Roboto", 12, 600))
@@ -77,9 +78,17 @@ class MainWindow(QMainWindow):
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
 
-app = QApplication(sys.argv)
-app.setFont(QFont("Roboto",12))
-window = MainWindow()
-window.show()
+    def calculate_mulch(self):
+        # Area
+        area = self.area_line.value()
+        print(area)
+        self.result_label.setText(f"The amount of mulch needed is (area) liters/square decimeters.")
 
-app.exec()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setFont(QFont("Roboto",12))
+    window = MainWindow()
+    window.show()
+
+    app.exec()

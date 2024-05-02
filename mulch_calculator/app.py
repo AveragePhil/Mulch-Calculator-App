@@ -1,10 +1,12 @@
+
+import controller
 import sys
 
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
     QApplication,
     QLabel,
-    QLineEdit,
+    QSpinBox,
     QMainWindow,
     QPushButton,
     QVBoxLayout,
@@ -32,23 +34,23 @@ class MainWindow(QMainWindow):
         area_layout = QHBoxLayout()
         area_label = QLabel("Total area: ")
         area_label.setFont(QFont("Roboto", 12, 600))
-        self.area_line = QLineEdit()
+        self.area_spinbox = QSpinBox()
         area_units = QLabel("square meters")
         area_units.setFont(QFont("Roboto", 12, 600))
         area_layout.addWidget(area_label)
-        area_layout.addWidget(self.area_line)
+        area_layout.addWidget(self.area_spinbox)
         area_layout.addWidget(area_units)
-        area_layout.setContentsMargins(62,15,0,0)
+        area_layout.setContentsMargins(13,10,0,0)
 
 
         depth_layout = QHBoxLayout()
         depth_label = QLabel("Mulch layer depth: ")
         depth_label.setFont(QFont("Roboto", 12, 600))
-        self.depth_line = QLineEdit()
+        self.depth_spinbox = QSpinBox()
         depth_units = QLabel("centimeters")
         depth_units.setFont(QFont("Roboto", 12, 600))
         depth_layout.addWidget(depth_label)
-        depth_layout.addWidget(self.depth_line)
+        depth_layout.addWidget(self.depth_spinbox)
         depth_layout.addWidget(depth_units)
         depth_layout.setContentsMargins(0,0,0,10)
 
@@ -60,9 +62,9 @@ class MainWindow(QMainWindow):
         clear_button = QPushButton("Clear")
         buttons_layout.addWidget(self.calculate_button)
         buttons_layout.addWidget(clear_button)
-        result_label = QLabel("The amount of mulch needed is ")
-        result_label.setFont(QFont("Roboto", 12, 600))
-        result_label.setContentsMargins(0,10,10,10)
+        self.result_label = QLabel("The amount of mulch needed is ")
+        self.result_label.setFont(QFont("Roboto", 12, 600))
+        self.result_label.setContentsMargins(0,10,10,10)
 
         layout.addWidget(title_label)
         layout.addWidget(top_line_label)
@@ -70,7 +72,7 @@ class MainWindow(QMainWindow):
         layout.addLayout(depth_layout)
         layout.addLayout(buttons_layout)
         layout.addWidget(bottom_line_label)
-        layout.addWidget(result_label)
+        layout.addWidget(self.result_label)
         widget = QWidget()
         widget.setLayout(layout)
 
@@ -79,16 +81,19 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def calculate_mulch(self):
-        # Area
-        area = self.area_line.value()
-        print(area)
-        self.result_label.setText(f"The amount of mulch needed is (area) liters/square decimeters.")
+        area = self.area_spinbox.value()
+        depth = self.depth_spinbox.value()
+
+        mulch = controller.calculate_mulch(area, depth)
+
+        output = controller.display_results(mulch)
+
+        self.result_label.setText(output)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__' :
     app = QApplication(sys.argv)
     app.setFont(QFont("Roboto",12))
     window = MainWindow()
     window.show()
-
     app.exec()
